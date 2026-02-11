@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mmWave Radar Data Collection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='radar_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="radar-icon">📡</div>
+            <h1>mmWave Radar Data Collection</h1>
+            <p>Real-time Sensor Data Acquisition & Cloud Sync</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Control Panel -->
+            <div class="control-panel card">
+                <h2>⚙️ Radar Control</h2>
+                
+                <div class="form-group">
+                    <label for="comPort">COM Port:</label>
+                    <input type="text" id="comPort" value="COM14" placeholder="e.g., COM14">
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration (seconds):</label>
+                    <input type="number" id="duration" value="60" min="1" max="3600">
+                </div>
+
+                <div class="button-group">
+                    <button id="startBtn" class="btn btn-success" onclick="startRecording()">
+                        ▶️ Start Recording
+                    </button>
+                    <button id="stopBtn" class="btn btn-danger" onclick="stopRecording()" disabled>
+                        ⏹️ Stop Recording
+                    </button>
+                </div>
+
+                <div id="status" class="status-box" style="display: none;">
+                    <div id="statusMessage"></div>
+                    <div id="statusTime"></div>
+                </div>
+            </div>
+
+            <!-- Live Data Display -->
+            <div class="live-data-panel card">
+                <h2>📊 Live Data Stream</h2>
+                
+                <div class="data-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">Data Points</div>
+                        <div class="stat-value" id="pointCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Current Value</div>
+                        <div class="stat-value" id="currentValue">--</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Recording Time</div>
+                        <div class="stat-value" id="recordTime">00:00</div>
+                    </div>
+                </div>
+
+                <!-- Live Chart -->
+                <canvas id="liveChart" width="400" height="200"></canvas>
+
+                <!-- Data Table -->
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time (sec)</th>
+                                <th>Value (mm)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <tr><td colspan="2">Waiting for data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-panel card">
+                <h2>📈 Statistics</h2>
+                
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-item">
+                        <span class="stat-name">Mean</span>
+                        <span class="stat-val" id="statMean">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Min</span>
+                        <span class="stat-val" id="statMin">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Max</span>
+                        <span class="stat-val" id="statMax">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-name">Std Dev</span>
+                        <span class="stat-val" id="statStd">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Sync Status -->
+            <div class="cloud-sync-panel card">
+                <h2>☁️ Cloud Synchronization</h2>
+                
+                <div class="sync-status">
+                    <p>Google Sheets Status: <span id="sheetStatus" class="status-badge status-waiting">Waiting...</span></p>
+                    <p>API URL: <span class="url-display">https://script.google.com/macros/s/AKfycbwpedLqtRQK4ur6DQg2aVt3coMBanozFB6-FdZHdLYWBJjhgswSwwpuDDKBPFRhVVSu/exec</span></p>
+                    <p id="syncMessage">Data will sync in real-time while recording</p>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="errorBox" class="error-box card" style="display: none;">
+                <h3>⚠️ Error</h3>
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>mmWave Radar System | Real-time Data Acquisition</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="{{ url_for('static', filename='radar_script.js') }}"></script>
+</body>
+</html>
