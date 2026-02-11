@@ -7,7 +7,7 @@ import os
 import traceback
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 # Create uploads folder if it doesn't exist
@@ -55,12 +55,12 @@ def predict():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
         
-        # Read CSV
-        df = pd.read_csv(filepath)
-        
-        if 'HR' not in df.columns:
+        # Read CSV with chunking for large files
+        try:
+            df = pd.read_csv(filepath, usecols=['HR'])
+        except Exception as e:
             os.remove(filepath)
-            return jsonify({'error': 'CSV must contain "HR" column'}), 400
+            return jsonify({'error': f'CSV error: {str(e)}'}), 400
         
         # Normalize HR
         scaler = StandardScaler()

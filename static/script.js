@@ -222,11 +222,13 @@ function generateRecommendations(stageCounts, qualityScore, totalWindows) {
 // Music control
 function toggleMusic() {
     if (bgMusic.paused) {
-        bgMusic.play().catch(error => {
-            console.log('Autoplay prevented:', error);
+        bgMusic.play().then(() => {
+            musicToggle.classList.add('active');
+            musicToggle.textContent = '🔊 Music Playing';
+        }).catch(error => {
+            console.log('Playback blocked:', error);
+            alert('Music playback blocked by browser. Click the button again to try.');
         });
-        musicToggle.classList.add('active');
-        musicToggle.textContent = '🔊 Music Playing';
     } else {
         bgMusic.pause();
         musicToggle.classList.remove('active');
