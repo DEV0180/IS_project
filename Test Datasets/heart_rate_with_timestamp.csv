@@ -1,4 +1,4 @@
-time_sec,heart_rate_BPM
+TIMESTAMP,HR
 1,48.0
 2,60.0
 3,72.0
