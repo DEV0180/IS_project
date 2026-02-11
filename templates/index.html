@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Quality Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop muted>
+        <source src="{{ url_for('static', filename='soothing-music.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="moon-icon">🌙</div>
+            <h1>Sleep Quality Assessment</h1>
+            <p>Deep Sleep Analysis using AI</p>
+        </div>
+
+        <!-- Music Control -->
+        <div class="music-control">
+            <button id="musicToggle" onclick="toggleMusic()">
+                <span id="musicIcon">🔊</span> Enable Soothing Music
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Upload Section -->
+            <div class="upload-section card">
+                <h2>📤 Upload Your Heart Rate Data</h2>
+                <p class="info-text">Upload a CSV file with HR (Heart Rate) data</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <p>Drag & drop your CSV file here</p>
+                    <p class="or-text">or</p>
+                    <label class="file-input-label">
+                        <input type="file" id="fileInput" accept=".csv" hidden>
+                        Click to Browse
+                    </label>
+                </div>
+
+                <button id="uploadBtn" class="btn btn-primary" disabled>
+                    Analyze Sleep Data
+                </button>
+
+                <div id="fileInfo" class="file-info" style="display: none;">
+                    <p>Selected file: <span id="fileName"></span></p>
+                    <p>Size: <span id="fileSize"></span></p>
+                </div>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing your sleep data...</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <!-- Sleep Quality Score -->
+                <div class="score-card card">
+                    <h2>Sleep Quality Score</h2>
+                    <div class="score-circle">
+                        <div class="score-value"><span id="qualityScore">0</span>%</div>
+                        <div class="score-label">Overall Quality</div>
+                    </div>
+                    <p class="confidence-text">Model Confidence: <span id="confidence">0</span>%</p>
+                </div>
+
+                <!-- Sleep Stages Breakdown -->
+                <div class="stages-card card">
+                    <h2>Sleep Stages Breakdown</h2>
+                    <div class="stages-grid" id="stagesGrid">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Sleep Timeline -->
+                <div class="timeline-card card">
+                    <h2>Sleep Timeline (Sequential Stages)</h2>
+                    <div class="timeline" id="timeline">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Analysis Details -->
+                <div class="details-card card">
+                    <h2>Detailed Analysis</h2>
+                    <div class="analysis-table">
+                        <div class="table-row header">
+                            <div>Sleep Stage</div>
+                            <div>Duration (30-sec windows)</div>
+                            <div>Percentage</div>
+                        </div>
+                        <div id="analysisDetails">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations-card card">
+                    <h2>💡 Sleep Recommendations</h2>
+                    <ul id="recommendationsList">
+                        <!-- Will be populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Error Section -->
+            <div id="errorSection" class="error-message card" style="display: none;">
+                <h3>⚠️ Error</h3>
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Sleep Quality Assessment System | Powered by Deep Learning</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
