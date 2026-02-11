@@ -10,15 +10,14 @@ env/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.ipynb
 
 # Data files (large datasets)
 *.npy
 *.csv
+*.xlsx
 data_64Hz/
 
 # Model files
-*.h5
 *.pkl
 *.joblib
 *.pt
