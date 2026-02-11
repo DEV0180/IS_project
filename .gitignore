@@ -13,9 +13,9 @@ env/
 
 # Data files (large datasets)
 *.npy
-*.csv
 *.xlsx
 data_64Hz/
+S002_whole_df.csv
 
 # Model files
 *.pkl
