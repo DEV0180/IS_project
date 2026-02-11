@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+isp/
+venv/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Data files (large datasets)
+*.npy
+*.csv
+data_64Hz/
+
+# Model files
+*.h5
+*.pkl
+*.joblib
+*.pt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Matplotlib
+*.fig
+
+# Logs
+*.log
